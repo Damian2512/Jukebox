@@ -78,7 +78,7 @@ if( isset( $_POST['password'])) {
 <!--                <img src="images/logo.png" alt="IMG">-->
             </div>
 
-            <form class="login100-form validate-form" action="" method="POST">
+            <form class="login100-form validate-form" action="forgotpassword.php" method="POST">
 					<span class="login100-form-title">
 						Reset Password
 					</span>

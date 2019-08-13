@@ -1,8 +1,7 @@
 <?php include "db.php"; ?>
 <?php
     if (isset($_POST['submit'])) {
-        session_start();
-    
+
         if (isset($_POST['username'])) {
             $username = $_POST['username'];
         }
