@@ -61,7 +61,7 @@ if(isset($_POST['submit'])){
             $_SESSION['email'] = $email;
 
 
-            header("Location: ../main.php");
+           header("Location: ../main.php");
 
             exit();
 

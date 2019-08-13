@@ -186,3 +186,7 @@ img { max-width: 100%; }
 #registerForm{
 	display: none;
 }
+
+.form-gap {
+	padding-top: 70px;
+}
