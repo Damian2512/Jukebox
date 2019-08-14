@@ -1,71 +1,71 @@
 <?php include "db.php"; ?>
 <?php
-    if (isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
 
-        if (isset($_POST['username'])) {
-            $username = $_POST['username'];
+    if (isset($_POST['username'])) {
+        $username = $_POST['username'];
+    }
+    if (isset($_POST['surname'])) {
+        $surname = $_POST['surname'];
+    }
+    if (isset($_POST['lastname'])) {
+        $lastname = $_POST['lastname'];
+    }
+    if (isset($_POST['email'])) {
+        $email = $_POST['email'];
+    }
+
+    if (isset($_POST['password'])) {
+        $password = $_POST['password'];
+    }
+
+    $information =
+        $username &&
+        $surname &&
+        $lastname &&
+        $email &&
+        $password;
+
+
+    if (isset($_POST["username"])) {
+        if (empty($username)) {
+            echo "Vul AUB iets in <br>";
         }
-        if (isset($_POST['surname'])) {
-            $surname = $_POST['surname'];
+    }
+
+    if (isset($_POST["surname"])) {
+        if (empty($surname)) {
+            echo "Vul AUB iets in <br>";
         }
-        if (isset($_POST['lastname'])) {
-            $lastname = $_POST['lastname'];
+    }
+
+    if (isset($_POST["lastname"])) {
+        if (empty($lastname)) {
+            echo "Vul AUB iets in <br>";
         }
-        if (isset($_POST['email'])) {
-            $email = $_POST['email'];
+    }
+
+    if (isset($_POST["email"])) {
+        if (empty($email)) {
+            echo "Vul AUB een email in <br>";
         }
-    
-        if (isset($_POST['password'])) {
-            $password = $_POST['password'];
+    }
+
+    if (isset($_POST["password"])) {
+        if (empty($password)) {
+            echo "Vul AUB uw wachtwoord in<br>";
         }
-    
-        $information =
-            $username &&
-            $surname &&
-            $lastname &&
-            $email &&
-            $password;
-    
-    
-        if (isset($_POST["username"])) {
-            if (empty($username)) {
-                echo "Vul AUB iets in <br>";
-            }
-        }
-    
-        if (isset($_POST["surname"])) {
-            if (empty($surname)) {
-                echo "Vul AUB iets in <br>";
-            }
-        }
-    
-        if (isset($_POST["lastname"])) {
-            if (empty($lastname)) {
-                echo "Vul AUB iets in <br>";
-            }
-        }
-    
-        if (isset($_POST["email"])) {
-            if (empty($email)) {
-                echo "Vul AUB een email in <br>";
-            }
-        }
-    
-        if (isset($_POST["password"])) {
-            if (empty($password)) {
-                echo "Vul AUB uw wachtwoord in<br>";
-            }
-        }
-    
-    
-        if (!empty($information)) {
-    
-            $stmt = $conn->prepare("SELECT surname FROM jukebox WHERE surname = :surname");
-            $stmt->bindParam(':surname', $surname);
-            $stmt->execute();
-    
-    
-            $db_query = "INSERT INTO `jukebox`(
+    }
+
+
+    if (!empty($information)) {
+
+        $stmt = $conn->prepare("SELECT surname FROM jukebox WHERE surname = :surname");
+        $stmt->bindParam(':surname', $surname);
+        $stmt->execute();
+
+
+        $db_query = "INSERT INTO `jukebox`(
     `username`,
     `surname`,
     `lastname`,
@@ -78,22 +78,21 @@
     :lastname,
     :email,
     :password)";
-    
-    
-            $db_result = $conn->prepare($db_query);
-            $add_to_db = $db_result->execute(array(
-    
-                ":username" => $username,
-                ":surname" => $surname,
-                ":lastname" => $lastname,
-                ":email" => $email,
-                ":password" => password_hash($password, PASSWORD_DEFAULT)
-            ));
-        }
-    }
-    
 
-    ?>
+
+        $db_result = $conn->prepare($db_query);
+        $add_to_db = $db_result->execute(array(
+
+            ":username" => $username,
+            ":surname" => $surname,
+            ":lastname" => $lastname,
+            ":email" => $email,
+            ":password" => password_hash($password, PASSWORD_DEFAULT)
+        ));
+    }
+}
+
+?>
 <form class="login100-form validate-form" method="POST">
     <div class="form-group" data-validate=" ">
         <input class="form-username form-control" type="text" name="username" placeholder="username">
@@ -130,8 +129,8 @@
     </div>
     <div class="text-center p-t-60">
         <a id="AlAccount" class="txt2">
-        Heeft u al een account?
-        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+            Heeft u al een account?
+            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
         </a>
     </div>
 </form>

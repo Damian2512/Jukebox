@@ -1,10 +1,8 @@
 <?php include "action/db.php"; ?>
 
 <?php
-
 if (isset($_POST['submit'])) {
     session_start();
-
     if (isset($_POST['username'])) {
         $username = $_POST['username'];
     }
@@ -17,75 +15,58 @@ if (isset($_POST['submit'])) {
     if (isset($_POST['email'])) {
         $email = $_POST['email'];
     }
-
     if (isset($_POST['password'])) {
         $password = $_POST['password'];
     }
-
     $information =
         $username &&
         $surname &&
         $lastname &&
         $email &&
         $password;
-
-
     if (isset($_POST["username"])) {
         if (empty($username)) {
             echo "Vul AUB iets in <br>";
         }
     }
-
     if (isset($_POST["surname"])) {
         if (empty($surname)) {
             echo "Vul AUB iets in <br>";
         }
     }
-
     if (isset($_POST["lastname"])) {
         if (empty($lastname)) {
             echo "Vul AUB iets in <br>";
         }
     }
-
     if (isset($_POST["email"])) {
         if (empty($email)) {
             echo "Vul AUB een email in <br>";
         }
     }
-
     if (isset($_POST["password"])) {
         if (empty($password)) {
             echo "Vul AUB uw password in<br>";
         }
     }
-
-
     if (!empty($information)) {
-
         $stmt = $conn->prepare("SELECT surname FROM jukebox WHERE surname = :surname");
         $stmt->bindParam(':surname', $surname);
         $stmt->execute();
-
-
         $db_query = "INSERT INTO `jukebox`(
 `username`,
 `surname`,
 `lastname`,
 `email`,
 `password`)
-
 VALUES(
 :username,
 :surname,
 :lastname,
 :email,
 :password)";
-
-
         $db_result = $conn->prepare($db_query);
         $add_to_db = $db_result->execute(array(
-
             ":username" => $username,
             ":surname" => $surname,
             ":lastname" => $lastname,
@@ -94,7 +75,6 @@ VALUES(
         ));
     }
 }
-
 ?>
 
 
