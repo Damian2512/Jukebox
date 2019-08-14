@@ -7,6 +7,25 @@ if (!isset($_SESSION['ID'])) {
 }
 ?>
 
+<?php
+require_once("action/db.php");
+
+$sql = "SELECT * FROM jukebox WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bindParam(':username', $username);
+$stmt->bindParam(':surname', $surname);
+$stmt->bindParam(':lastname', $lastname);
+$stmt->bindParam(':email', $email);
+
+$stmt->bindValue(':username', $username);
+$stmt->bindValue(':surname', $surname);
+$stmt->bindValue(':lastname', $lastname);
+$stmt->bindValue(':email', $email);
+
+$stmt->execute(array($_SESSION['ID']));
+$stmt->fetchAll(PDO::FETCH_ASSOC);
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -158,51 +177,34 @@ if (!isset($_SESSION['ID'])) {
                 </div>
             </div>
         </nav>
+        <div class="container">
+            <div class="col-m-12">
 
-        <?php
-        require_once("action/db.php");
 
-        $sql = "SELECT * FROM jukebox WHERE id = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':surname', $surname);
-        $stmt->bindParam(':lastname', $lastname);
-        $stmt->bindParam(':email', $email);
-
-        $stmt->bindValue(':username', $username);
-        $stmt->bindValue(':surname', $surname);
-        $stmt->bindValue(':lastname', $lastname);
-        $stmt->bindValue(':email', $email);
-
-        $stmt->execute(array($_SESSION['ID']));
-        $profielen = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($profielen as $profiel) {
-            ?>
-            <div class="content">
-                <form name="edit" class="form" action="edit_profile.php" method="POST">
-                    <p id="page_titel">Edit profile</p>
-                    <input type="hidden" name="ID" id="id" value="<?php echo htmlentities($profiel->ID); ?>"/>
-                    <label>Titel: </label>
-                    <input type="text" name="username" id="username"
-                           value="<?php echo htmlentities($profiel->username); ?>"/>
-                    <label>Artiest: </label>
-                    <input type="text" name="surname" id="surname"
-                           value="<?php echo htmlentities($profiel->surname); ?>"/>
-                    <label>Genre: </label>
-                    <input type="text" name="lastname" id="lastname"
-                           value="<?php echo htmlentities($profiel->lastname); ?>"/>
-                    <label>Prijs: </label>
-                    <input type="text" name="email" id="email" value="<?php echo htmlentities($profiel->email); ?>"/>
-                    <br>
-                    <div class="icon_container">
-                        <input type="submit" class="icon" id="submit" name="submit" value="&rarr;"/>
-                    </div>
-                    <a href="main.php">Terug</a>
-                </form>
+                <div class="content">
+                    <form name="edit" class="form" action="" method="POST">
+                        <p id="page_titel">Edit profile</p>
+                        <input type="hidden" name="id" id="id" value="<?php echo $ID; ?>"/>
+                        <label>Username: </label><br>
+                        <input type="text" name="username" id="username"
+                               value="<?php echo $username; ?>"/><br>
+                        <label>Surname: </label><br>
+                        <input type="text" name="surname" id="surname"
+                               value="<?php echo $surname; ?>"/><br>
+                        <label>Lastname: </label><br>
+                        <input type="text" name="lastname" id="lastname"
+                               value="<?php echo $lastname; ?>"/><br>
+                        <label>Email: </label><br>
+                        <input type="text" name="email" id="email" value="<?php echo $email; ?>"/>
+                        <br>
+                        <div class="icon_container">
+                            <input type="submit" class="icon" id="submit" name="submit" value="&rarr;"/>
+                        </div>
+                        <a href="main.php">Terug</a>
+                    </form>
+                </div>
             </div>
-            <?php
-        }
-        ?>
+        </div>
     </div>
 </div>
 
