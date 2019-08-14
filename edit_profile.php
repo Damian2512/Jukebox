@@ -1,13 +1,3 @@
-<?php
-session_start();
-// print_r( $_SESSION );
-
-if (!isset($_SESSION['ID'])) {
-    header("Location:index.php");
-}
-?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +14,7 @@ if (!isset($_SESSION['ID'])) {
 
 <style>
     .profielfoto {
-        margin-left: 37px;
+        margin-left: -20px;
         margin-top: -20px;
         width: 100px;
         height: 100px;
@@ -92,7 +82,7 @@ if (!isset($_SESSION['ID'])) {
     <nav id="sidebar">
         <div class="sidebar-header">
             <!-- Profielfoto Als geupload -->
-            <img src="images/male.png"
+            <img src="https://yt3.ggpht.com/a-/AJLlDp3C67Xo_2oGDImEy6a3nLp0zss977Mf8-NElg=s900-mo-c-c0xffffffff-rj-k-no"
                  class="img-responsive profielfoto">
             <!-- Gebruikersnaam -->
             <p class="gebruikersnaam"><?php echo $_SESSION['email']; ?></p>
@@ -101,7 +91,7 @@ if (!isset($_SESSION['ID'])) {
             <br>
             <br>
 
-            <a class="sublink" href="#">Profiel bewerken</a>
+            <a class="sublink" href="edit_profile.php">Profiel bewerken</a>
 
         </div>
 
@@ -159,6 +149,39 @@ if (!isset($_SESSION['ID'])) {
             </div>
         </nav>
 
+        <?php
+        include "action/db.php";
+
+        $sql = "SELECT * FROM jukebox WHERE ID = ?";
+        $stmt = $verbinding->prepare($sql);
+        $stmt->execute(array($_GET['id']));
+        $profielen = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($profielen as $profiel) {
+            ?>
+            <div class="content">
+                <form name="edit" class="form" action="index.php?page-klant_update" method="POST">
+                    <p id="page_titel">Bewerk profiel</p>
+                    <input type="hidden" name="id" id="id" value="<?php echo $profiel['ID']; ?>"/>
+                    <label>Titel: </label>
+                    <input type="text" name="username" id="username" value="<?php echo $profiel['username']; ?>"/>
+                    <label>Artiest: </label>
+                    <input type="text" name="surname" id="surname" value="<?php echo $profiel['surname']; ?>"/>
+                    <label>Genre: </label>
+                    <input type="text" name="lastname" id="lastname" value="<?php echo $profiel['lastname']; ?>"/>
+                    <label>Prijs: </label>
+                    <input type="text" name="email" id="email" value="<?php echo $profiel['email']; ?>"/>
+                    <br>
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn" name="submit">
+                            Update profiel
+                        </button>
+                    </div>
+                    <a href="main.php?page=main">Terug</a>
+                </form>
+            </div>
+            <?php
+        }
+        ?>
 
     </div>
 </div>
@@ -215,3 +238,4 @@ if (!isset($_SESSION['ID'])) {
 </script>
 </body>
 </html>
+
