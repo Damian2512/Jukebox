@@ -162,7 +162,7 @@ if (!isset($_SESSION['ID'])) {
         <?php
         require_once("action/db.php");
 
-        $sql = "SELECT * FROM jukebox WHERE id = :id;";
+        $sql = "SELECT * FROM jukebox WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':surname', $surname);
@@ -174,7 +174,7 @@ if (!isset($_SESSION['ID'])) {
         $stmt->bindValue(':lastname', $lastname);
         $stmt->bindValue(':email', $email);
 
-        $stmt->execute($sql);
+        $stmt->execute(array($_SESSION['ID']));
         $profielen = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($profielen as $profiel) {
             ?>

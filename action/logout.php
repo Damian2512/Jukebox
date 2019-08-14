@@ -1,6 +1,6 @@
 <?php
-		session_destroy();
-
-	header("location:../index.php");
-	$conn = NULL;
+session_start();
+session_destroy();
+// Redirect to the login page:
+header('Location: ../index.html');
 ?>
