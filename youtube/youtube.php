@@ -130,7 +130,7 @@ if (!isset($_SESSION['ID'])) {
         </ul>
 
         <ul class="list-unstyled CTAs">
-            <li><a href="../action/logout.php" class="download"><i class="fa fa-lock"></i> Uitloggen</a></li>
+            <li><a href="/action/logout.php" class="download"><i class="fa fa-lock"></i> Uitloggen</a></li>
         </ul>
     </nav>
 
