@@ -16,7 +16,7 @@ if (!isset($_SESSION['ID'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>FinnyBox</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
@@ -92,7 +92,7 @@ if (!isset($_SESSION['ID'])) {
     <nav id="sidebar">
         <div class="sidebar-header">
             <!-- Profielfoto Als geupload -->
-            <img src="images/male.png"
+            <img src="../images/male.png"
                  class="img-responsive profielfoto">
             <!-- Gebruikersnaam -->
             <p class="gebruikersnaam"><?php echo $_SESSION['email']; ?></p>
@@ -101,7 +101,7 @@ if (!isset($_SESSION['ID'])) {
             <br>
             <br>
 
-            <a class="sublink" href="edit_profile.php">Profiel bewerken</a>
+            <a class="sublink" href="../edit_profile.php">Profiel bewerken</a>
 
         </div>
 
@@ -112,6 +112,7 @@ if (!isset($_SESSION['ID'])) {
             <li class="active">
                 <a href="#"><i class="fa fa-archive"></i> Bladeren</a>
             </li>
+
             <li>
                 <a href="#"><i class="fa fa-user-circle"></i> Artist</a>
             </li>
@@ -153,12 +154,44 @@ if (!isset($_SESSION['ID'])) {
                 </div>
             </div>
         </nav>
+        <!--hier is de form voor youtube-->
+        <div class="container">
+            <div class="col-md-12">
+                <form action="">
+                    <input type="text" placeholder="Zoek.." name="zoekresultaat">
+                     <button type="submit">knop</button>
+                </form>
+            </div>
+        </div>
+        <br>
+        <br>
+        <?php
+
+        require_once 'Api.class.php';
+        require_once 'Youtube.class.php';
 
 
+        if (isset($_REQUEST['zoekresultaat'])) {
+            $youtube = new Youtube();
+            $results = $youtube->search($_REQUEST['zoekresultaat']);
+            foreach ($results as $result) {
+
+                echo ' <div class="ytvid">
+		  <iframe width="420" height="345" src="' . $result['playerUrl'] . '"></iframe>
+		  <form method="post" action="">
+		  <input type="hidden" name="trackID" value="' . $result['id'] . '">
+		  <br>
+		  <input type="submit" value="Add to playlist">
+		  </form>
+		 </div>
+		 ';
+            }
+        }
+        ?>
+
+        <!--hier eindigd het form voor youtube-->
     </div>
 </div>
-
-
 <script>
     $('#collapseOne').on('show.bs.collapse', function () {
         $('.panel-heading').animate({

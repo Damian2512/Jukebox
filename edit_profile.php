@@ -133,13 +133,8 @@ $stmt->fetchAll(PDO::FETCH_ASSOC);
             </li>
 
             <li>
-                <a href="#"><i class="fa fa-music"></i> Radio</a>
-            </li>
-
-            <li>
                 <a href="#"><i class="fa fa-user-circle"></i> Artist</a>
             </li>
-
             <li>
                 <a href="#"><i class="fa fa-archive"></i> Album</a>
             </li>
@@ -169,7 +164,7 @@ $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Page</a></li>
+                        <li><a href="/youtube/youtube.php">Youtube</a></li>
                         <li><a href="#">Page</a></li>
                         <li><a href="#">Page</a></li>
                         <li><a href="#">Page</a></li>
@@ -210,28 +205,6 @@ $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 
-<div class="panel-group" id="accordion">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                    Zoek een video!
-                </a>
-            </h4>
-        </div>
-        <div id="collapseOne" class="panel-collapse collapse">
-            <div class="panel-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            Hier komt een zoekbalk
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <script>
     $('#collapseOne').on('show.bs.collapse', function () {
         $('.panel-heading').animate({

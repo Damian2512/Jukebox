@@ -168,5 +168,14 @@ a.article, a.article:hover {
     }
 }
 
+/*youtube video styling*/
 
-
+.ytvid {
+    box-sizing: border-box;
+    display: inline-block;
+    padding-right: 9px;
+    padding-left: 43px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 25px;
+}
