@@ -8,7 +8,7 @@
  */
 class Youtube extends Api {
 
-    private static $key = 'AIzaSyCF0gU1HcxlwjTdGusWWD6C8Yn2lQGYOh4';
+    private static $key = 'api key';
     private static $baseUrl = 'https://www.googleapis.com/youtube/v3/search';
     private static $videoBaseUrl = 'http://www.youtube.com/embed/';
 
