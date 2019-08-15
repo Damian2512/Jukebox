@@ -3,7 +3,7 @@
 
 class Api {
 
-    private $maxResults = 25;
+    private $maxResults = 9;
     private $curl;
 
     /**

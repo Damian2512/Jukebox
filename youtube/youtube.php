@@ -110,7 +110,7 @@ if (!isset($_SESSION['ID'])) {
         <br>
         <ul class="list-unstyled components">
             <li class="active">
-                <a href="#"><i class="fa fa-archive"></i> Bladeren</a>
+                <a href="/youtube/youtube.php"><i class="fa fa-youtube-play"></i> Youtube</a>
             </li>
 
             <li>
@@ -142,29 +142,16 @@ if (!isset($_SESSION['ID'])) {
                         <i class="glyphicon glyphicon-align-left"></i>
                         <span>Navigatie verbergen</span>
                     </button>
-                </div>
 
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/youtube/youtube.php">Youtube</a></li>
-                        <li><a href="#">Page</a></li>
-                        <li><a href="#">Page</a></li>
-                        <li><a href="#">Page</a></li>
-                    </ul>
                 </div>
-            </div>
-        </nav>
-        <!--hier is de form voor youtube-->
-        <div class="container">
-            <div class="col-md-12">
-                <form action="">
-                    <input type="text" placeholder="Zoek.." name="zoekresultaat">
-                     <button type="submit">knop</button>
+                <!--hier is de form voor youtube-->
+                <form action="" style="float: right; padding-left: 2px">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Zoek.." name="zoekresultaat">
                 </form>
             </div>
-        </div>
-        <br>
-        <br>
+        </nav>
+
+
         <?php
 
         require_once 'Api.class.php';
@@ -180,8 +167,6 @@ if (!isset($_SESSION['ID'])) {
 		  <iframe width="420" height="345" src="' . $result['playerUrl'] . '"></iframe>
 		  <form method="post" action="">
 		  <input type="hidden" name="trackID" value="' . $result['id'] . '">
-		  <br>
-		  <input type="submit" value="Add to playlist">
 		  </form>
 		 </div>
 		 ';
