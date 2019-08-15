@@ -110,7 +110,7 @@ if (!isset($_SESSION['ID'])) {
         <br>
         <ul class="list-unstyled components">
             <li class="active">
-                <a href="#"><i class="fa fa-archive"></i> Bladeren</a>
+                <a href="youtube/youtube.php"><i class="fa fa-youtube-play"></i> Youtube</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-user-circle"></i> Artist</a>

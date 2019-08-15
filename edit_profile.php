@@ -129,9 +129,12 @@ $stmt->fetchAll(PDO::FETCH_ASSOC);
         <br>
         <ul class="list-unstyled components">
             <li class="active">
-                <a href="#"><i class="fa fa-archive"></i> Bladeren</a>
+                <a href="main.php"><i class="fa fa-archive"></i> Home</a>
             </li>
 
+            <li>
+                <a href="youtube/youtube.php"><i class="fa fa-user-circle"></i> Youtube</a>
+            </li>
             <li>
                 <a href="#"><i class="fa fa-user-circle"></i> Artist</a>
             </li>
@@ -161,15 +164,6 @@ $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <span>Navigatie verbergen</span>
                     </button>
                 </div>
-
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/youtube/youtube.php">Youtube</a></li>
-                        <li><a href="#">Page</a></li>
-                        <li><a href="#">Page</a></li>
-                        <li><a href="#">Page</a></li>
-                    </ul>
-                </div>
             </div>
         </nav>
         <div class="container">
@@ -196,7 +190,6 @@ $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <div class="icon_container">
                             <input type="submit" class="btn btn-block" id="submit" name="submit" value="Update"/>
                         </div>
-                        <a href="main.php">Terug</a>
                     </form>
                 </div>
             </div>
