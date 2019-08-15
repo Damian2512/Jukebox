@@ -23,7 +23,7 @@ if(isset($_POST['submit'])){
             echo "Dit wachtwoord/E-mail is incorrect";
         }
     } else {
-        die( 'Fout: user niet gevonden');
+        header("Location: ../index.php");
     }
 }
 ?>
