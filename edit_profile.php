@@ -179,7 +179,7 @@ $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="content">
                     <form name="edit" class="login-form" action="" method="post">
                         <p id="page_titel">Edit profile</p>
-                        <input type="hidden" name="id" id="id" value="<?php echo $ID; ?>"/>
+                        <input type="hidden" name="id" id="id" value="<?php echo $id; ?>"/>
                         <label>Username: </label><br>
                         <input type="text" name="username" id="username"
                                value="<?php echo $username; ?>"/><br>
