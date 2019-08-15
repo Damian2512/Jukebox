@@ -1,4 +1,4 @@
-<form action="action/loginaction.php" method="post" class="login-form">
+<form action="loginaction.php" method="post" class="login-form">
     <!-- Login form -->
     <div class="form-group">
         <label class="sr-only" for="form-username">Email</label>

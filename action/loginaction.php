@@ -4,7 +4,7 @@ session_start();
 if(isset($_POST['submit'])){
     $email = !empty($_POST['email']) ? trim($_POST['email']) : null;
     $passwordAttempt = !empty($_POST['password']) ? trim($_POST['password']) : null;
-    $sql = "SELECT ID ,email, password FROM jukebox WHERE email = :email";
+    $sql = "SELECT ID , email, password FROM jukebox WHERE email = :email";
     $stmt = $conn->prepare($sql);
     $stmt->bindValue(':email', $email);
     $stmt->execute();
