@@ -182,7 +182,7 @@ $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
                 <div class="content">
-                    <form name="edit" class="form" action="" method="POST">
+                    <form name="edit" class="login-form" action="" method="post">
                         <p id="page_titel">Edit profile</p>
                         <input type="hidden" name="id" id="id" value="<?php echo $ID; ?>"/>
                         <label>Username: </label><br>
@@ -197,8 +197,9 @@ $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <label>Email: </label><br>
                         <input type="text" name="email" id="email" value="<?php echo $email; ?>"/>
                         <br>
+                        <br>
                         <div class="icon_container">
-                            <input type="submit" class="icon" id="submit" name="submit" value="&rarr;"/>
+                            <input type="submit" class="btn btn-block" id="submit" name="submit" value="Update"/>
                         </div>
                         <a href="main.php">Terug</a>
                     </form>
