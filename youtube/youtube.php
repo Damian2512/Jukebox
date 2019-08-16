@@ -149,7 +149,7 @@ if (!isset($_SESSION['ID'])) {
                 </div>
                 <!--hier is de form voor youtube-->
                 <form action="" style="float: right; padding-left: 2px">
-                    <input class="form-control mr-sm-2" type="text" placeholder="Zoek.." name="zoekresultaat">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Zoek op youtube..." name="zoekresultaat">
                 </form>
             </div>
         </nav>

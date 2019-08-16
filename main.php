@@ -113,11 +113,11 @@ if (!isset($_SESSION['ID'])) {
                 <a href="youtube/youtube.php"><i class="fa fa-youtube-play"></i> Youtube</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-user-circle"></i> Artist</a>
+                <a href="#"><i class="fa fa-music"></i> Radio</a>
             </li>
 
             <li>
-                <a href="#"><i class="fa fa-archive"></i> Album</a>
+                <a href="#"><i class="fa fa-archive"></i> Netflix</a>
             </li>
 
             <li>
@@ -145,7 +145,6 @@ if (!isset($_SESSION['ID'])) {
 
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/youtube/youtube.php">Youtube</a></li>
                         <li><a href="#">Page</a></li>
                         <li><a href="#">Page</a></li>
                         <li><a href="#">Page</a></li>

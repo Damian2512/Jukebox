@@ -3,7 +3,7 @@
 /**
  * Class Youtube
  * Connectie met de Youtube Data API.
- * Check the guide voor mee info
+ * Check the guide voor meer info
  * https://developers.google.com/youtube/v3/docs/search/list
  */
 class Youtube extends Api {
