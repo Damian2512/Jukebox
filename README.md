@@ -1,7 +1,6 @@
 # Jukebox
-A website that wil function like a sort jukebox but that in this century.
+This jukebox websites works with an API from youtube.
+Use this website to get your own APIKEY and get started:
+-  https://developers.google.com/youtube/v3/getting-started
 
-This jukebox will work with an API from youtube.
-
-On the website you can search for your favorite song, artist or album and if you want to see with numbers
-you have already listened.
+On this website you can search for your favorite songs, artist and albums.
