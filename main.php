@@ -115,14 +115,6 @@ if (!isset($_SESSION['ID'])) {
             <li>
                 <a href="#"><i class="fa fa-music"></i> Radio</a>
             </li>
-
-            <li>
-                <a href="#"><i class="fa fa-archive"></i> Netflix</a>
-            </li>
-
-            <li>
-                <a href="#"><i class="fa fa-clock-o"></i> Recentelijk afgespeeld</a>
-            </li>
         </ul>
 
         <ul class="list-unstyled CTAs">

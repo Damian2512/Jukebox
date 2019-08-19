@@ -136,14 +136,7 @@ $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <a href="youtube/youtube.php"><i class="fa fa-user-circle"></i> Youtube</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-user-circle"></i> Artist</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-archive"></i> Album</a>
-            </li>
-
-            <li>
-                <a href="#"><i class="fa fa-clock-o"></i> Recentelijk afgespeeld</a>
+                <a href="#"><i class="fa fa-user-circle"></i> Radio</a>
             </li>
         </ul>
 
