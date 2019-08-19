@@ -22,71 +22,6 @@ if (!isset($_SESSION['ID'])) {
 </head>
 <body>
 
-<style>
-    .profielfoto {
-        margin-left: 37px;
-        margin-top: -20px;
-        width: 100px;
-        height: 100px;
-        float: left;
-        border-radius: 5px;
-    }
-
-    .gebruikersnaam {
-        color: white;
-        float: left;
-        margin-top: 15px;
-    }
-
-    .sublink {
-        color: white;
-        font-size: 11px;
-        text-decoration: underline;
-        margin-top: -40px;
-    }
-
-    #accordion {
-        position: fixed;
-        bottom: -20px !important;
-        width: 100%;
-    }
-
-    .panel-default > .panel-heading {
-        background: #00B4FF;
-    }
-
-    .panel-heading {
-        padding: 0;
-        border-top-left-radius: 0px;
-        border-top-right-radius: 0px;
-    }
-
-    .panel {
-        border: solid white 0px !important;
-    }
-
-    .panel-group .panel {
-        border-radius: 0;
-    }
-
-    .panel-title a {
-        color: #FFFFFF;
-        text-align: center;
-        width: 100%;
-        display: block;
-        padding: 10px 15px;
-        font-size: 24px;
-        font-family: Helvetica, Arial, sans-serif;
-        outline: none;
-        background-color: #7386D5;
-    }
-
-    .panel-title a:hover, .panel-title a:focus, .panel-title a:active {
-        text-decoration: none;
-        outline: none;
-    }
-</style>
-
 <div class="wrapper">
     <!-- Sidebar Holder -->
     <nav id="sidebar">
@@ -101,7 +36,7 @@ if (!isset($_SESSION['ID'])) {
             <br>
             <br>
 
-            <a class="sublink" href="../edit_profile.php">Profiel bewerken</a>
+            <a class="sublink" id="loadprofile" href="../edit_profile.php">Profiel bewerken</a>
 
         </div>
 

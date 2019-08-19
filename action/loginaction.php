@@ -19,11 +19,9 @@ if(isset($_POST['submit'])){
             header("Location: ../main.php");
             exit();
         }else{
-            var_dump($user['password'], $passwordAttempt);
-            echo "Dit wachtwoord/E-mail is incorrect";
+            header("Location: ../index.php");
         }
-    } else {
-        header("Location: ../index.php");
     }
+
 }
 ?>

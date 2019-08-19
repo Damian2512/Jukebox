@@ -5,8 +5,8 @@ if (isset($_POST['submit'])) {
     if (isset($_POST['username'])) {
         $username = $_POST['username'];
     }
-    if (isset($_POST['surname'])) {
-        $surname = $_POST['surname'];
+    if (isset($_POST['firstname'])) {
+        $firstname = $_POST['firstname'];
     }
     if (isset($_POST['lastname'])) {
         $lastname = $_POST['lastname'];
@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
 
     $information =
         $username &&
-        $surname &&
+        $firstname &&
         $lastname &&
         $email &&
         $password;
@@ -33,8 +33,8 @@ if (isset($_POST['submit'])) {
         }
     }
 
-    if (isset($_POST["surname"])) {
-        if (empty($surname)) {
+    if (isset($_POST["firstname"])) {
+        if (empty($firstname)) {
             echo "Vul AUB iets in <br>";
         }
     }
@@ -60,21 +60,21 @@ if (isset($_POST['submit'])) {
 
     if (!empty($information)) {
 
-        $stmt = $conn->prepare("SELECT surname FROM jukebox WHERE surname = :surname");
-        $stmt->bindParam(':surname', $surname);
+        $stmt = $conn->prepare("SELECT firstname FROM jukebox WHERE firstname = :firstname");
+        $stmt->bindParam(':firstname', $firstname);
         $stmt->execute();
 
 
         $db_query = "INSERT INTO `jukebox`(
     `username`,
-    `surname`,
+    `firstname`,
     `lastname`,
     `email`,
     `password`)
     
     VALUES(
     :username,
-    :surname,
+    :firstname,
     :lastname,
     :email,
     :password)";
@@ -84,7 +84,7 @@ if (isset($_POST['submit'])) {
         $add_to_db = $db_result->execute(array(
 
             ":username" => $username,
-            ":surname" => $surname,
+            ":firstname" => $firstname,
             ":lastname" => $lastname,
             ":email" => $email,
             ":password" => password_hash($password, PASSWORD_DEFAULT)
@@ -99,8 +99,8 @@ if (isset($_POST['submit'])) {
         <span class="focus-input100" data-placeholder="username"></span>
     </div>
     <div class="form-group" data-validate=" ">
-        <input class="form-username form-control" type="text" name="surname" placeholder="surname">
-        <span class="focus-input100" data-placeholder="surname"></span>
+        <input class="form-username form-control" type="text" name="firstname" placeholder="firstname">
+        <span class="focus-input100" data-placeholder="firstname"></span>
     </div>
     <div class="form-group" data-validate="">
         <input class="form-username form-control" type="text" name="lastname" placeholder="lastname">

@@ -11,9 +11,7 @@
     <input type="submit" name="submit" value="Login" class="login100-form-btn" >
     <!-- Code -->
     <div class="text-center p-t-12">
-                                                <span class="txt1">
-                                                    Wachtwoord
-                                                </span>
+      <span class="txt1"> Wachtwoord </span>
         <a class="txt2" href="../forgotpassword.php">
             vergeten?
         </a>
