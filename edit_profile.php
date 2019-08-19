@@ -1,7 +1,6 @@
 <?php
 session_start();
 // print_r( $_SESSION );
-
 if (!isset($_SESSION['ID'])) {
     header("Location:index.php");
 }
@@ -10,25 +9,27 @@ if (!isset($_SESSION['ID'])) {
 <?php
 require_once("action/db.php");
 
-$sql = "SELECT * FROM jukebox WHERE id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bindParam(':username', $username);
-$stmt->bindParam(':surname', $surname);
-$stmt->bindParam(':lastname', $lastname);
-$stmt->bindParam(':email', $email);
+if (isset($_POST['submit'])) {
 
-$stmt->bindValue(':username', $username);
-$stmt->bindValue(':surname', $surname);
-$stmt->bindValue(':lastname', $lastname);
-$stmt->bindValue(':email', $email);
+    $username = $_POST['username'];
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $email = $_POST['email'];
+    $id = $_SESSION['ID'];
 
-$stmt->execute(array($_SESSION['ID']));
-$stmt->fetchAll(PDO::FETCH_ASSOC);
+    $sql = "UPDATE jukebox SET username=:username, firstname=:firstname, lastname=:lastname, email=:email WHERE ID=:id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(":username", $username, PDO::PARAM_STR);
+    $stmt->bindValue(":firstname", $firstname, PDO::PARAM_STR);
+    $stmt->bindValue(":lastname", $lastname, PDO::PARAM_STR);
+    $stmt->bindValue(":email", $email, PDO::PARAM_STR);
+    $stmt->bindValue(":id", $_SESSION['ID'], PDO::PARAM_STR);
+    $stmt->execute();
 
+}
 ?>
-
 <!DOCTYPE html>
-<html>
+<html lang="nl">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,71 +41,6 @@ $stmt->fetchAll(PDO::FETCH_ASSOC);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-
-<style>
-    .profielfoto {
-        margin-left: 37px;
-        margin-top: -20px;
-        width: 100px;
-        height: 100px;
-        float: left;
-        border-radius: 5px;
-    }
-
-    .gebruikersnaam {
-        color: white;
-        float: left;
-        margin-top: 15px;
-    }
-
-    .sublink {
-        color: white;
-        font-size: 11px;
-        text-decoration: underline;
-        margin-top: -40px;
-    }
-
-    #accordion {
-        position: fixed;
-        bottom: -20px !important;
-        width: 100%;
-    }
-
-    .panel-default > .panel-heading {
-        background: #00B4FF;
-    }
-
-    .panel-heading {
-        padding: 0;
-        border-top-left-radius: 0px;
-        border-top-right-radius: 0px;
-    }
-
-    .panel {
-        border: solid white 0px !important;
-    }
-
-    .panel-group .panel {
-        border-radius: 0;
-    }
-
-    .panel-title a {
-        color: #FFFFFF;
-        text-align: center;
-        width: 100%;
-        display: block;
-        padding: 10px 15px;
-        font-size: 24px;
-        font-family: Helvetica, Arial, sans-serif;
-        outline: none;
-        background-color: #7386D5;
-    }
-
-    .panel-title a:hover, .panel-title a:focus, .panel-title a:active {
-        text-decoration: none;
-        outline: none;
-    }
-</style>
 
 <div class="wrapper">
     <!-- Sidebar Holder -->
@@ -120,7 +56,7 @@ $stmt->fetchAll(PDO::FETCH_ASSOC);
             <br>
             <br>
 
-            <a class="sublink" href="edit_profile.php">Profiel bewerken</a>
+            <a class="sublink" id="loadprofile" href="edit_profile.php">Profiel bewerken</a>
 
         </div>
 
@@ -133,7 +69,7 @@ $stmt->fetchAll(PDO::FETCH_ASSOC);
             </li>
 
             <li>
-                <a href="youtube/youtube.php"><i class="fa fa-user-circle"></i> Youtube</a>
+                <a href="youtube/youtube.php"><i class="fa fa-youtube-play"></i> Youtube</a>
             </li>
             <li>
                 <a href="#"><i class="fa fa-user-circle"></i> Radio</a>
@@ -159,34 +95,52 @@ $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             </div>
         </nav>
+<!--Hier begint het formulier voor het updaten van het ingelogde account-->
         <div class="container">
-            <div class="col-m-12">
-
-
+            <div class="col-md-12">
                 <div class="content">
-                    <form name="edit" class="login-form" action="" method="post">
-                        <p id="page_titel">Edit profile</p>
-                        <input type="hidden" name="id" id="id" value="<?php echo $id; ?>"/>
-                        <label>Username: </label><br>
-                        <input type="text" name="username" id="username"
-                               value="<?php echo $username; ?>"/><br>
-                        <label>Surname: </label><br>
-                        <input type="text" name="surname" id="surname"
-                               value="<?php echo $surname; ?>"/><br>
-                        <label>Lastname: </label><br>
-                        <input type="text" name="lastname" id="lastname"
-                               value="<?php echo $lastname; ?>"/><br>
-                        <label>Email: </label><br>
-                        <input type="text" name="email" id="email" value="<?php echo $email; ?>"/>
-                        <br>
-                        <br>
-                        <div class="icon_container">
-                            <input type="submit" class="btn btn-block" id="submit" name="submit" value="Update"/>
-                        </div>
+                    <form role="form" method="POST" action="">
+                        <table class='table table-hover table-responsive table-bordered'>
+                            <tr>
+                                <td>Username</td>
+                                <td><input type="text" name="username" value=" "
+                                           class='form-control'/>
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Firstname</td>
+                                <td><input type="text" name="firstname" value=" "
+                                           class='form-control'/></td>
+                            </tr>
+
+                            <tr>
+                                <td>Lastname</td>
+                                <td><input type="text" name="lastname" value=" "
+                                           class='form-control'/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td><input type="text" name="email" value=" "
+                                           class='form-control'/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <button type="submit" name="edit" class="btn btn-primary btn-block">Update</button>
+                                </td>
+                            </tr>
+                            <input type="hidden" name="id" id="id" value=" "/>
+                        </table>
                     </form>
                 </div>
             </div>
         </div>
+<!-- Hier eindigd het form-->
+
     </div>
 </div>
 
