@@ -123,20 +123,22 @@ if (!isset($_SESSION['ID'])) {
             <div class="modal-dialog">
 
                 <?php
-                $sql = "SELECT * FROM jukebox WHERE email = '" . $_SESSION['email'] . "'";
-                $statement = $conn->prepare($sql);
-                $statement->execute();
-                $person = $statement->fetch(PDO::FETCH_OBJ);
-                if (isset ($_POST['username']) && isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && isset($_POST['ID'])) {
-                    $id = $_POST['ID'];
-                    $username = $_POST['username'];
-                    $firstname = $_POST['firstname'];
-                    $lastname = $_POST['lastname'];
-                    $email = $_POST['email'];
-                    $sql = 'UPDATE jukebox SET username=:username, firstname=:firstname, lastname=:lastname, email=:email WHERE ID=:id';
+                if (isset($_POST["submit"])) {
+                    $sql = "SELECT * FROM jukebox WHERE email = '" . $_SESSION['email'] . "'";
                     $statement = $conn->prepare($sql);
-                    if ($statement->execute([':username' => $username, ':firstname' => $firstname, ':lastname' => $lastname, ':email' => $email, ':id' => $id])) {
-                        header("Location: edit_profile.php");
+                    $statement->execute();
+                    $person = $statement->fetch(PDO::FETCH_OBJ);
+                    if (isset ($_POST['username']) && isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && isset($_POST['ID'])) {
+                        $id = $_POST['ID'];
+                        $username = $_POST['username'];
+                        $firstname = $_POST['firstname'];
+                        $lastname = $_POST['lastname'];
+                        $email = $_POST['email'];
+                        $sql = 'UPDATE jukebox SET username=:username, firstname=:firstname, lastname=:lastname, email=:email WHERE ID=:id';
+                        $statement = $conn->prepare($sql);
+                        if ($statement->execute([':username' => $username, ':firstname' => $firstname, ':lastname' => $lastname, ':email' => $email, ':id' => $id])) {
+                            header("Location: edit_profile.php");
+                        }
                     }
                 }
                 ?>
