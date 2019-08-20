@@ -101,6 +101,8 @@ if (isset($_POST['submit'])) {
                 <div class="content">
                     <form role="form" method="POST" action="">
                         <table class='table table-hover table-responsive table-bordered'>
+
+                            <input type="hidden" name="id" id="id" value=" "/>
                             <tr>
                                 <td>Username</td>
                                 <td><input type="text" name="username" value=" "
@@ -130,10 +132,9 @@ if (isset($_POST['submit'])) {
                             <tr>
                                 <td></td>
                                 <td>
-                                    <button type="submit" name="edit" class="btn btn-primary btn-block">Update</button>
+                                    <input type="submit" name="submit" class="btn btn-primary btn-block" value="Update">
                                 </td>
                             </tr>
-                            <input type="hidden" name="id" id="id" value=" "/>
                         </table>
                     </form>
                 </div>
