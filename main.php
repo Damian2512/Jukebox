@@ -36,7 +36,7 @@ if (!isset($_SESSION['ID'])) {
             <br>
             <br>
 
-            <a class="sublink" id="loadprofile" href="edit_profile.php">Profiel bewerken</a>
+            <a class="sublink" href="edit_profile.php">Profiel bewerken</a>
 
         </div>
 
