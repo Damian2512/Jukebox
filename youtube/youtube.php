@@ -52,7 +52,7 @@ if (!isset($_SESSION['ID'])) {
             </li>
 
             <li>
-                <a href="#"><i class="fa fa-user-circle"></i> Radio</a>
+                <a href="#"><i class="fa fa-music"></i> Radio</a>
             </li>
         </ul>
 

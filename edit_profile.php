@@ -42,14 +42,14 @@ if (!isset($_SESSION['ID'])) {
         <br>
         <ul class="list-unstyled components">
             <li class="active">
-                <a href="main.php"><i class="fa fa-archive"></i> Home</a>
+                <a href="main.php"><i class="fa fa-home"></i> Home</a>
             </li>
 
             <li>
                 <a href="youtube/youtube.php"><i class="fa fa-youtube-play"></i> Youtube</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-user-circle"></i> Radio</a>
+                <a href="#"><i class="fa fa-music"></i> Radio</a>
             </li>
         </ul>
 
@@ -174,7 +174,7 @@ if (!isset($_SESSION['ID'])) {
                                        class="form-control">
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-info">Update person</button>
+                                <button type="submit" name="submit" class="btn btn-info">Update</button>
                             </div>
                         </form>
                     </div>
