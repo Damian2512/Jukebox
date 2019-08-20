@@ -138,7 +138,7 @@ if (!isset($_SESSION['ID'])) {
                         $firstname = $_POST['firstname'];
                         $lastname = $_POST['lastname'];
                         $email = $_POST['email'];
-                        $sql = 'UPDATE jukebox SET username=:username, firstname=:firstname, lastname=:lastname, email=:email WHERE ID=:id';
+                        $sql = 'UPDATE jukebox SET username=username, firstname=:firstname, lastname=:lastname, email=:email WHERE ID=:id';
                         $statement = $conn->prepare($sql);
 
                        if ($statement->execute([':username' => $username, ':firstname' => $firstname, ':lastname' => $lastname, ':email' => $email, ':id' => $id])) {
@@ -158,7 +158,7 @@ if (!isset($_SESSION['ID'])) {
                         <h4 class="modal-title">Update Account</h4>
                     </div>
                     <div class="modal-body">
-                        <form method="post" enctype="multipart/form-data">
+                        <form method="POST" id="edit_profile" enctype="multipart/form-data">
                             <div class="form-group">
 
                                 <input value="<?= $person->ID; ?>" type="text" name="id" id="id" class="form-control">
@@ -183,9 +183,7 @@ if (!isset($_SESSION['ID'])) {
                                 <input type="email" value="<?= $person->email; ?>" name="email" id="email"
                                        class="form-control">
                             </div>
-                            <div class="form-group">
                                 <input type="submit" id="submit" name="submit" class="btn btn-info" value="Update">
-                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
