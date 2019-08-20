@@ -1,31 +1,8 @@
 <?php
 session_start();
-// print_r( $_SESSION );
+//print_r( $_SESSION );
 if (!isset($_SESSION['ID'])) {
     header("Location:index.php");
-}
-?>
-
-<?php
-require_once("action/db.php");
-
-if (isset($_POST['submit'])) {
-
-    $username = $_POST['username'];
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $email = $_POST['email'];
-    $id = $_SESSION['ID'];
-
-    $sql = "UPDATE jukebox SET username=:username, firstname=:firstname, lastname=:lastname, email=:email WHERE ID=:id";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindValue(":username", $username, PDO::PARAM_STR);
-    $stmt->bindValue(":firstname", $firstname, PDO::PARAM_STR);
-    $stmt->bindValue(":lastname", $lastname, PDO::PARAM_STR);
-    $stmt->bindValue(":email", $email, PDO::PARAM_STR);
-    $stmt->bindValue(":id", $_SESSION['ID'], PDO::PARAM_STR);
-    $stmt->execute();
-
 }
 ?>
 <!DOCTYPE html>
@@ -95,52 +72,56 @@ if (isset($_POST['submit'])) {
                 </div>
             </div>
         </nav>
-<!--Hier begint het formulier voor het updaten van het ingelogde account-->
+
+        <?php
+        require 'action/db.php';
+        $sql = 'SELECT * FROM jukebox';
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        $people = $statement->fetchAll(PDO::FETCH_OBJ);
+        ?>
+
+        <!--Hier begint het formulier voor het updaten van het ingelogde account-->
         <div class="container">
-            <div class="col-md-12">
-                <div class="content">
-                    <form role="form" method="POST" action="">
-                        <table class='table table-hover table-responsive table-bordered'>
+            <div class="card mt-5">
+                <div class="card-header">
+                    <h2>All people</h2>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <?php foreach ($people as $person): ?>
+                            <tr>
+                                <th>ID</th>
+                                <td><?= $person->ID; ?></td>
+                            </tr>
+                            <tr>
+                                <th>Username</th>
+                                <td><?= $person->username; ?></td>
+                            </tr>
+                            <tr>
+                                <th>Firstname</th>
+                                <td><?= $person->firstname; ?></td>
+                            </tr>
+                            <tr>
+                                <th>Lastname</th>
+                                <td><?= $person->lastname; ?></td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td><?= $person->email; ?></td>
+                            </tr>
+                            <tr>
 
-                            <input type="hidden" name="id" id="id" value=" "/>
-                            <tr>
-                                <td>Username</td>
-                                <td><input type="text" name="username" value=" "
-                                           class='form-control'/>
+                                <th></th>
+                                <td><a href="edit.php?id=<?= $person->ID ?>" class="btn btn-info">Edit</a></td>
 
-                                </td>
                             </tr>
-
-                            <tr>
-                                <td>Firstname</td>
-                                <td><input type="text" name="firstname" value=" "
-                                           class='form-control'/></td>
-                            </tr>
-
-                            <tr>
-                                <td>Lastname</td>
-                                <td><input type="text" name="lastname" value=" "
-                                           class='form-control'/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Email</td>
-                                <td><input type="text" name="email" value=" "
-                                           class='form-control'/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>
-                                    <input type="submit" name="submit" class="btn btn-primary btn-block" value="Update">
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
+                        <?php endforeach; ?>
+                    </table>
                 </div>
             </div>
         </div>
-<!-- Hier eindigd het form-->
+        <!-- Hier eindigd het form-->
 
     </div>
 </div>
