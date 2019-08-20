@@ -30,7 +30,7 @@ if (!isset($_SESSION['ID'])) {
             <img src="images/male.png"
                  class="img-responsive profielfoto">
             <!-- Gebruikersnaam -->
-            <p class="gebruikersnaam"><?php echo $_SESSION['email']; ?></p>
+            <p class="gebruikersnaam"><?php echo $_SESSION['ID']; ?></p>
             <br>
             <br>
             <br>

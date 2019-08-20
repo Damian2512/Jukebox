@@ -75,7 +75,7 @@ if (!isset($_SESSION['ID'])) {
 
         <?php
         require 'action/db.php';
-        $sql = "SELECT * FROM jukebox" ;
+        $sql = "SELECT * FROM jukebox WHERE email = '" . $_SESSION['email'] . "'";
         $statement = $conn->prepare($sql);
         $statement->execute();
         $people = $statement->fetchAll(PDO::FETCH_OBJ);
@@ -85,34 +85,33 @@ if (!isset($_SESSION['ID'])) {
         <div class="container">
             <div class="card mt-5">
                 <div class="card-header">
-                    <h2>All people</h2>
+                    <h2>My Account</h2>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">
                         <?php foreach ($people as $person): ?>
-                            <thead>
+
                             <tr>
                                 <th>ID</th>
-                                <th>Username</th>
-                                <th>Firstname</th>
-                                <th>Lastname</th>
-                                <th>Email</th>
-                                <th>Updaten</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
                                 <td><?php echo $person->ID; ?></td>
-                                <td><?php echo $person->username; ?></td>
-
-                                <td><?php echo $person->firstname; ?></td>
-
-                                <td><?php echo $person->lastname; ?></td>
-
-                                <td><?php echo $person->email; ?></td>
-                                <td><a class="btn btn-info" data-toggle="modal" data-target="#myModal">Edit</a></td>
                             </tr>
-                            </tbody>
+                            <tr>
+                                <th>Username</th>
+                                <td><?php echo $person->username; ?></td>
+                            </tr>
+                            <th>Firstname</th>
+                            <td><?php echo $person->firstname; ?></td>
+                            <tr>
+                                <th>Lastname</th>
+                                <td><?php echo $person->lastname; ?></td>
+                            </tr>
+                            <th>Email</th>
+                            <td><?php echo $person->email; ?></td>
+                            <tr>
+                                <th>Updaten</th>
+                                <td><a class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Edit</a></td>
+                            </tr>
+
                         <?php endforeach; ?>
                     </table>
                 </div>
@@ -124,13 +123,12 @@ if (!isset($_SESSION['ID'])) {
             <div class="modal-dialog">
 
                 <?php
-                //require 'action/db.php';
-                //$id = $_GET['id'];
-                $sql = "SELECT * FROM jukebox WHERE email = '".$_SESSION['email']."'";
+                $sql = "SELECT * FROM jukebox WHERE email = '" . $_SESSION['email'] . "'";
                 $statement = $conn->prepare($sql);
                 $statement->execute();
                 $person = $statement->fetch(PDO::FETCH_OBJ);
-                if (isset ($_POST['username'])  && isset($_POST['firstname'])  && isset($_POST['lastname'])  && isset($_POST['email']) ) {
+                if (isset ($_POST['username']) && isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && isset($_POST['ID'])) {
+                    $id = $_POST['ID'];
                     $username = $_POST['username'];
                     $firstname = $_POST['firstname'];
                     $lastname = $_POST['lastname'];
@@ -153,7 +151,7 @@ if (!isset($_SESSION['ID'])) {
                         <form method="post">
                             <div class="form-group">
 
-                                <input value="<?= $person->id; ?>" type="hidden" name="id" id="id" class="form-control">
+                                <input value="<?= $person->ID; ?>" type="text" name="id" id="id" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="name">Username</label>
