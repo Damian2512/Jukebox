@@ -99,14 +99,18 @@ if (!isset($_SESSION['ID'])) {
                                 <th>Username</th>
                                 <td><?php echo $person->username; ?></td>
                             </tr>
+                        <tr>
                             <th>Firstname</th>
                             <td><?php echo $person->firstname; ?></td>
+                        </tr>
                             <tr>
                                 <th>Lastname</th>
                                 <td><?php echo $person->lastname; ?></td>
                             </tr>
+                        <tr>
                             <th>Email</th>
                             <td><?php echo $person->email; ?></td>
+                        </tr>
                             <tr>
                                 <th>Updaten</th>
                                 <td><a class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Edit</a></td>
@@ -123,7 +127,7 @@ if (!isset($_SESSION['ID'])) {
             <div class="modal-dialog">
 
                 <?php
-                if (isset($_POST["submit"])) {
+                if (isset($_POST[' submit '])) {
                     $sql = "SELECT * FROM jukebox WHERE email = '" . $_SESSION['email'] . "'";
                     $statement = $conn->prepare($sql);
                     $statement->execute();
@@ -136,12 +140,16 @@ if (!isset($_SESSION['ID'])) {
                         $email = $_POST['email'];
                         $sql = 'UPDATE jukebox SET username=:username, firstname=:firstname, lastname=:lastname, email=:email WHERE ID=:id';
                         $statement = $conn->prepare($sql);
-                        if ($statement->execute([':username' => $username, ':firstname' => $firstname, ':lastname' => $lastname, ':email' => $email, ':id' => $id])) {
+
+                       if ($statement->execute([':username' => $username, ':firstname' => $firstname, ':lastname' => $lastname, ':email' => $email, ':id' => $id])) {
                             header("Location: edit_profile.php");
                         }
                     }
                 }
+                print_r($_POST);
+
                 ?>
+<!-- het wordt wel geupdate maar niet naar de database gestuurd hierboven-->
 
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -150,7 +158,7 @@ if (!isset($_SESSION['ID'])) {
                         <h4 class="modal-title">Update Account</h4>
                     </div>
                     <div class="modal-body">
-                        <form method="post">
+                        <form method="post" enctype="multipart/form-data">
                             <div class="form-group">
 
                                 <input value="<?= $person->ID; ?>" type="text" name="id" id="id" class="form-control">
@@ -176,7 +184,7 @@ if (!isset($_SESSION['ID'])) {
                                        class="form-control">
                             </div>
                             <div class="form-group">
-                                <button type="submit" name="submit" class="btn btn-info">Update</button>
+                                <input type="submit" id="submit" name="submit" class="btn btn-info" value="Update">
                             </div>
                         </form>
                     </div>
