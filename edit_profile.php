@@ -27,7 +27,7 @@ if (!isset($_SESSION['ID'])) {
             <img src="images/male.png"
                  class="img-responsive profielfoto">
             <!-- Gebruikersnaam -->
-            <p class="gebruikersnaam"><?php echo $_SESSION['email']; ?></p>
+            <p class="gebruikersnaam"><?php echo $_SESSION['ID']; ?></p>
             <br>
             <br>
             <br>
@@ -75,7 +75,7 @@ if (!isset($_SESSION['ID'])) {
 
         <?php
         require 'action/db.php';
-        $sql = 'SELECT * FROM jukebox';
+        $sql = "SELECT * FROM jukebox" ;
         $statement = $conn->prepare($sql);
         $statement->execute();
         $people = $statement->fetchAll(PDO::FETCH_OBJ);
@@ -90,41 +90,107 @@ if (!isset($_SESSION['ID'])) {
                 <div class="card-body">
                     <table class="table table-bordered">
                         <?php foreach ($people as $person): ?>
+                            <thead>
                             <tr>
                                 <th>ID</th>
-                                <td><?= $person->ID; ?></td>
-                            </tr>
-                            <tr>
                                 <th>Username</th>
-                                <td><?= $person->username; ?></td>
-                            </tr>
-                            <tr>
                                 <th>Firstname</th>
-                                <td><?= $person->firstname; ?></td>
-                            </tr>
-                            <tr>
                                 <th>Lastname</th>
-                                <td><?= $person->lastname; ?></td>
-                            </tr>
-                            <tr>
                                 <th>Email</th>
-                                <td><?= $person->email; ?></td>
+                                <th>Updaten</th>
                             </tr>
+                            </thead>
+                            <tbody>
                             <tr>
+                                <td><?php echo $person->ID; ?></td>
+                                <td><?php echo $person->username; ?></td>
 
-                                <th></th>
-                                <td><a href="edit.php?id=<?= $person->ID ?>" class="btn btn-info">Edit</a></td>
+                                <td><?php echo $person->firstname; ?></td>
 
+                                <td><?php echo $person->lastname; ?></td>
+
+                                <td><?php echo $person->email; ?></td>
+                                <td><a class="btn btn-info" data-toggle="modal" data-target="#myModal">Edit</a></td>
                             </tr>
+                            </tbody>
                         <?php endforeach; ?>
                     </table>
                 </div>
             </div>
-        </div>
-        <!-- Hier eindigd het form-->
+        </div><!-- Hier eindigd het form-->
 
-    </div>
-</div>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <?php
+                //require 'action/db.php';
+                //$id = $_GET['id'];
+                $sql = "SELECT * FROM jukebox WHERE email = '".$_SESSION['email']."'";
+                $statement = $conn->prepare($sql);
+                $statement->execute();
+                $person = $statement->fetch(PDO::FETCH_OBJ);
+                if (isset ($_POST['username'])  && isset($_POST['firstname'])  && isset($_POST['lastname'])  && isset($_POST['email']) ) {
+                    $username = $_POST['username'];
+                    $firstname = $_POST['firstname'];
+                    $lastname = $_POST['lastname'];
+                    $email = $_POST['email'];
+                    $sql = 'UPDATE jukebox SET username=:username, firstname=:firstname, lastname=:lastname, email=:email WHERE ID=:id';
+                    $statement = $conn->prepare($sql);
+                    if ($statement->execute([':username' => $username, ':firstname' => $firstname, ':lastname' => $lastname, ':email' => $email, ':id' => $id])) {
+                        header("Location: edit_profile.php");
+                    }
+                }
+                ?>
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Update Account</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post">
+                            <div class="form-group">
+
+                                <input value="<?= $person->id; ?>" type="hidden" name="id" id="id" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Username</label>
+                                <input value="<?= $person->username; ?>" type="text" name="username" id="username"
+                                       class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Firstname</label>
+                                <input value="<?= $person->firstname; ?>" type="text" name="firstname" id="firstname"
+                                       class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Lastname</label>
+                                <input value="<?= $person->lastname; ?>" type="text" name="lastname" id="lastname"
+                                       class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" value="<?= $person->email; ?>" name="email" id="email"
+                                       class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-info">Update person</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div><!--end modal content-->
+            </div><!--end modal dialog-->
+        </div><!--eind modal-->
+
+    </div><!-- Page Content Holder -->
+
+
+</div><!--end wrapper-->
 
 
 <script>
