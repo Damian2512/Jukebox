@@ -47,9 +47,6 @@ if (!isset($_SESSION['ID'])) {
             <li class="active">
                 <a href="youtube/youtube.php"><i class="fa fa-youtube-play"></i> Youtube</a>
             </li>
-            <li>
-                <a href="#"><i class="fa fa-music"></i> Radio</a>
-            </li>
         </ul>
 
         <ul class="list-unstyled CTAs">
