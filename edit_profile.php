@@ -27,7 +27,7 @@ if (!isset($_SESSION['ID'])) {
             <img src="images/male.png"
                  class="img-responsive profielfoto">
             <!-- Gebruikersnaam -->
-            <p class="gebruikersnaam"><?php echo $_SESSION['ID']; ?></p>
+            <p class="gebruikersnaam"><?php echo $_SESSION['email']; ?></p>
             <br>
             <br>
             <br>
@@ -92,28 +92,25 @@ if (!isset($_SESSION['ID'])) {
                         <?php foreach ($people as $person): ?>
 
                             <tr>
-                                <th>ID</th>
-                                <td><?php echo $person->ID; ?></td>
-                            </tr>
-                            <tr>
                                 <th>Username</th>
                                 <td><?php echo $person->username; ?></td>
                             </tr>
-                        <tr>
-                            <th>Firstname</th>
-                            <td><?php echo $person->firstname; ?></td>
-                        </tr>
+                            <tr>
+                                <th>Firstname</th>
+                                <td><?php echo $person->firstname; ?></td>
+                            </tr>
                             <tr>
                                 <th>Lastname</th>
                                 <td><?php echo $person->lastname; ?></td>
                             </tr>
-                        <tr>
-                            <th>Email</th>
-                            <td><?php echo $person->email; ?></td>
-                        </tr>
                             <tr>
-                                <th>Updaten</th>
-                                <td><a class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Edit</a></td>
+                                <th>Email</th>
+                                <td><?php echo $person->email; ?></td>
+                            </tr>
+                            <tr>
+                                <th>Update</th>
+                                <td><a class="btn btn-primary btn-block" data-toggle="modal"
+                                       data-target="#myModal">Edit</a></td>
                             </tr>
 
                         <?php endforeach; ?>
@@ -121,35 +118,27 @@ if (!isset($_SESSION['ID'])) {
                 </div>
             </div>
         </div><!-- Hier eindigd het form-->
+        <?php
+        if (isset($_POST['submit'])) {
+            $data = [
+                'id' => $_POST['ID'],
+                'username' => $_POST['username'],
+                'firstname' => $_POST['firstname'],
+                'lastname' => $_POST['lastname'],
+                'email' => $_POST['email'],
+            ];
+            $sql = "UPDATE jukebox SET username = :username, firstname = :firstname, lastname = :lastname, email = :email WHERE id = :id";
+            $conn->prepare($sql)->execute($data);
 
+            if ($sql) {
+                $_SESSION['email'] = $_POST['email'];
+                header("Refresh:0");
+            }
+        }
+        ?>
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
-
-                <?php
-                if (isset($_POST[' submit '])) {
-                    $sql = "SELECT * FROM `jukebox` WHERE email = '" . $_SESSION['email'] . "'";
-                    $statement = $conn->prepare($sql);
-                    $statement->execute();
-                    $person = $statement->fetch(PDO::FETCH_OBJ);
-                    if (isset ($_POST['username']) && isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && isset($_POST['ID'])) {
-                        $id = $_POST['ID'];
-                        $username = $_POST['username'];
-                        $firstname = $_POST['firstname'];
-                        $lastname = $_POST['lastname'];
-                        $email = $_POST['email'];
-                        $sql = 'UPDATE `jukebox` SET username=:username, firstname=:firstname, lastname=:lastname, email=:email WHERE ID=:id';
-                        $statement = $conn->prepare($sql);
-
-                       if ($statement->execute([':username' => $username, ':firstname' => $firstname, ':lastname' => $lastname, ':email' => $email, ':ID' => $id])) {
-                            header("Location: edit_profile.php");
-                        }
-                    }
-                }
-                print_r($_POST); // het wordt wel geupdate maar niet naar de database gestuurd hierboven
-
-                ?>
-
 
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -159,27 +148,36 @@ if (!isset($_SESSION['ID'])) {
                     </div>
                     <div class="modal-body">
                         <form method="POST" id="edit_profile" enctype="multipart/form-data">
-                            <div class="form-group">
 
-                                <input value="<?= $person->ID; ?>" type="text" name="id" id="id" class="form-control"/>
+                            <div class="form-group">
+                                <input value="<?php echo $person->ID; ?>" type="text" name="ID" id="id"
+                                       class="form-control"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input value="<?php echo $person->username; ?>" type="text" name="username"
+                                       id="username"
+                                       class="form-control"/>
                             </div>
                             <div class="form-group">
-                                <label for="name">Username</label>
-                                <input value="<?= $person->username; ?>" type="text" name="username" id="username" class="form-control"/>
+                                <label for="firstname">Firstname</label>
+                                <input value="<?php echo $person->firstname; ?>" type="text" name="firstname"
+                                       id="firstname"
+                                       class="form-control"/>
                             </div>
                             <div class="form-group">
-                                <label for="name">Firstname</label>
-                                <input value="<?= $person->firstname; ?>" type="text" name="firstname" id="firstname" class="form-control"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Lastname</label>
-                                <input value="<?= $person->lastname; ?>" type="text" name="lastname" id="lastname" class="form-control"/>
+                                <label for="lastname">Lastname</label>
+                                <input value="<?php echo $person->lastname; ?>" type="text" name="lastname"
+                                       id="lastname"
+                                       class="form-control"/>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" value="<?= $person->email; ?>" name="email" id="email" class="form-control"/>
+                                <input type="email" value="<?php echo $person->email; ?>" name="email" id="email"
+                                       class="form-control"/>
                             </div>
-                                <input type="submit" id="submit" name="submit" class="btn btn-info" value="Update"/>
+                            <input type="submit" id="submit" name="submit" class="btn btn-info" value="Update"/>
                         </form>
                     </div>
                     <div class="modal-footer">
