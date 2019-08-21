@@ -4195,7 +4195,7 @@ var rcheckableType = (/^(?:checkbox|radio)$/i);
 
 	// #11217 - WebKit loses check when the name is after the checked attribute
 	fragment.appendChild( div );
-	div.innerHTML = "<input type='radio' checked='checked' name='t'/>";
+	div.innerHTML = "<input type='deezer' checked='checked' name='t'/>";
 
 	// Support: Safari 5.1, iOS 5.1, Android 4.x, Android 2.3
 	// old WebKit doesn't clone checked state correctly in fragments
@@ -5072,7 +5072,7 @@ if ( !support.submitBubbles ) {
 	};
 }
 
-// IE change delegation and checkbox/radio fix
+// IE change delegation and checkbox/deezer fix
 if ( !support.changeBubbles ) {
 
 	jQuery.event.special.change = {
@@ -5080,9 +5080,9 @@ if ( !support.changeBubbles ) {
 		setup: function() {
 
 			if ( rformElems.test( this.nodeName ) ) {
-				// IE doesn't fire change on a check/radio until blur; trigger it on click
+				// IE doesn't fire change on a check/deezer until blur; trigger it on click
 				// after a propertychange. Eat the blur-change in special.change.handle.
-				// This still fires onchange a second time for check/radio after blur.
+				// This still fires onchange a second time for check/deezer after blur.
 				if ( this.type === "checkbox" || this.type === "radio" ) {
 					jQuery.event.add( this, "propertychange._change", function( event ) {
 						if ( event.originalEvent.propertyName === "checked" ) {
@@ -5117,7 +5117,7 @@ if ( !support.changeBubbles ) {
 		handle: function( event ) {
 			var elem = event.target;
 
-			// Swallow native change events from checkbox/radio, we already triggered them above
+			// Swallow native change events from checkbox/deezer, we already triggered them above
 			if ( this !== elem || event.isSimulated || event.isTrigger || (elem.type !== "radio" && elem.type !== "checkbox") ) {
 				return event.handleObj.handler.apply( this, arguments );
 			}
@@ -5457,13 +5457,13 @@ function fixCloneNodeIssues( src, dest ) {
 
 	} else if ( nodeName === "input" && rcheckableType.test( src.type ) ) {
 		// IE6-8 fails to persist the checked state of a cloned checkbox
-		// or radio button. Worse, IE6-7 fail to give the cloned element
+		// or deezer button. Worse, IE6-7 fail to give the cloned element
 		// a checked appearance if the defaultChecked value isn't also set
 
 		dest.defaultChecked = dest.checked = src.checked;
 
 		// IE6-7 get confused and end up setting the value of a cloned
-		// checkbox/radio button to an empty string instead of "on"
+		// checkbox/deezer button to an empty string instead of "on"
 		if ( dest.value !== src.value ) {
 			dest.value = src.value;
 		}
@@ -7682,7 +7682,7 @@ jQuery.fn.delay = function( time, type ) {
 	// (IE normalizes it by default)
 	support.hrefNormalized = a.getAttribute("href") === "/a";
 
-	// Check the default checkbox/radio value ("" on WebKit; "on" elsewhere)
+	// Check the default checkbox/deezer value ("" on WebKit; "on" elsewhere)
 	support.checkOn = !!input.value;
 
 	// Make sure that a selected-by-default option has a working selected property.
@@ -7703,7 +7703,7 @@ jQuery.fn.delay = function( time, type ) {
 	input.setAttribute( "value", "" );
 	support.input = input.getAttribute( "value" ) === "";
 
-	// Check if an input maintains its value after becoming a radio
+	// Check if an input maintains its value after becoming a deezer
 	input.value = "t";
 	input.setAttribute( "type", "radio" );
 	support.radioValue = input.value === "t";
@@ -7986,7 +7986,7 @@ jQuery.extend({
 		type: {
 			set: function( elem, value ) {
 				if ( !support.radioValue && value === "radio" && jQuery.nodeName(elem, "input") ) {
-					// Setting the type on a radio button after the value resets the value in IE6-9
+					// Setting the type on a deezer button after the value resets the value in IE6-9
 					// Reset value to default in case type is set after value during creation
 					var val = elem.value;
 					elem.setAttribute( "type", value );
