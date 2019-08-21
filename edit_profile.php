@@ -75,7 +75,7 @@ if (!isset($_SESSION['ID'])) {
 
         <?php
         require 'action/db.php';
-        $sql = "SELECT * FROM jukebox WHERE email = '" . $_SESSION['email'] . "'";
+        $sql = "SELECT * FROM `jukebox` WHERE email = '" . $_SESSION['email'] . "'";
         $statement = $conn->prepare($sql);
         $statement->execute();
         $people = $statement->fetchAll(PDO::FETCH_OBJ);
@@ -128,7 +128,7 @@ if (!isset($_SESSION['ID'])) {
 
                 <?php
                 if (isset($_POST[' submit '])) {
-                    $sql = "SELECT * FROM jukebox WHERE email = '" . $_SESSION['email'] . "'";
+                    $sql = "SELECT * FROM `jukebox` WHERE email = '" . $_SESSION['email'] . "'";
                     $statement = $conn->prepare($sql);
                     $statement->execute();
                     $person = $statement->fetch(PDO::FETCH_OBJ);
@@ -138,18 +138,18 @@ if (!isset($_SESSION['ID'])) {
                         $firstname = $_POST['firstname'];
                         $lastname = $_POST['lastname'];
                         $email = $_POST['email'];
-                        $sql = 'UPDATE jukebox SET username=username, firstname=:firstname, lastname=:lastname, email=:email WHERE ID=:id';
+                        $sql = 'UPDATE `jukebox` SET username=:username, firstname=:firstname, lastname=:lastname, email=:email WHERE ID=:id';
                         $statement = $conn->prepare($sql);
 
-                       if ($statement->execute([':username' => $username, ':firstname' => $firstname, ':lastname' => $lastname, ':email' => $email, ':id' => $id])) {
+                       if ($statement->execute([':username' => $username, ':firstname' => $firstname, ':lastname' => $lastname, ':email' => $email, ':ID' => $id])) {
                             header("Location: edit_profile.php");
                         }
                     }
                 }
-                print_r($_POST);
+                print_r($_POST); // het wordt wel geupdate maar niet naar de database gestuurd hierboven
 
                 ?>
-<!-- het wordt wel geupdate maar niet naar de database gestuurd hierboven-->
+
 
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -161,29 +161,25 @@ if (!isset($_SESSION['ID'])) {
                         <form method="POST" id="edit_profile" enctype="multipart/form-data">
                             <div class="form-group">
 
-                                <input value="<?= $person->ID; ?>" type="text" name="id" id="id" class="form-control">
+                                <input value="<?= $person->ID; ?>" type="text" name="id" id="id" class="form-control"/>
                             </div>
                             <div class="form-group">
                                 <label for="name">Username</label>
-                                <input value="<?= $person->username; ?>" type="text" name="username" id="username"
-                                       class="form-control">
+                                <input value="<?= $person->username; ?>" type="text" name="username" id="username" class="form-control"/>
                             </div>
                             <div class="form-group">
                                 <label for="name">Firstname</label>
-                                <input value="<?= $person->firstname; ?>" type="text" name="firstname" id="firstname"
-                                       class="form-control">
+                                <input value="<?= $person->firstname; ?>" type="text" name="firstname" id="firstname" class="form-control"/>
                             </div>
                             <div class="form-group">
                                 <label for="name">Lastname</label>
-                                <input value="<?= $person->lastname; ?>" type="text" name="lastname" id="lastname"
-                                       class="form-control">
+                                <input value="<?= $person->lastname; ?>" type="text" name="lastname" id="lastname" class="form-control"/>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" value="<?= $person->email; ?>" name="email" id="email"
-                                       class="form-control">
+                                <input type="email" value="<?= $person->email; ?>" name="email" id="email" class="form-control"/>
                             </div>
-                                <input type="submit" id="submit" name="submit" class="btn btn-info" value="Update">
+                                <input type="submit" id="submit" name="submit" class="btn btn-info" value="Update"/>
                         </form>
                     </div>
                     <div class="modal-footer">
