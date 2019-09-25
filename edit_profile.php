@@ -147,7 +147,7 @@ if (!isset($_SESSION['ID'])) {
                         <form method="POST" id="edit_profile" enctype="multipart/form-data">
 
                             <div class="form-group">
-                                <input value="<?php echo $person->ID; ?>" type="text" name="ID" id="id"
+                                <input value="<?php echo $person->ID; ?>" type="hidden" name="ID" id="id"
                                        class="form-control"/>
                             </div>
 
