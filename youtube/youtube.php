@@ -62,16 +62,8 @@ if (!isset($_SESSION['ID'])) {
 
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-
-                <div class="navbar-header">
-                    <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
-                        <i class="glyphicon glyphicon-align-left"></i>
-                        <span>Navigatie verbergen</span>
-                    </button>
-
-                </div>
                 <!--hier is de form voor youtube-->
-                <form action="" style="float: right; padding-left: 2px">
+                <form action="" style="float: left; padding-right: 2px">
                     <input class="form-control mr-sm-2" type="text" placeholder="Zoek op youtube..." name="zoekresultaat">
                 </form>
             </div>
@@ -123,12 +115,5 @@ if (!isset($_SESSION['ID'])) {
 <!-- Bootstrap Js CDN -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-        });
-    });
-</script>
 </body>
 </html>

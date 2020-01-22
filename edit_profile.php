@@ -58,18 +58,6 @@ if (!isset($_SESSION['ID'])) {
     <!-- Page Content Holder -->
     <div style="width: 100%;" id="content">
 
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-
-                <div class="navbar-header">
-                    <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
-                        <i class="glyphicon glyphicon-align-left"></i>
-                        <span>Navigatie verbergen</span>
-                    </button>
-                </div>
-            </div>
-        </nav>
-
         <?php
         require 'action/db.php';
         $sql = "SELECT * FROM `jukebox` WHERE email = '" . $_SESSION['email'] . "'";
@@ -210,13 +198,6 @@ if (!isset($_SESSION['ID'])) {
 <!-- Bootstrap Js CDN -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-        });
-    });
-</script>
 </body>
 </html>
 
